@@ -1,0 +1,17 @@
+<div class="row" *ngIf="!isLoading && users.length > 0">
+  <div class="col-sm-4" *ngFor="let user of users">
+    <div class="card" style="width: 18rem">
+      <img class="card-img-top" [src]="user.imagePath" [alt]="user.firstname" />
+      <div class="card-body">
+        <h5 class="card-title">{{ user.firstname }} {{ user.lastname }}</h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">email:{{ user.email }}</li>
+        <li class="list-group-item">phone number :{{ user.phoneNumber }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<mat-card *ngIf="users.length === 0">
+  <h1>no user found</h1>
+</mat-card>

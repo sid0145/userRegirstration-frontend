@@ -1,0 +1,102 @@
+<mat-card>
+  <form [formGroup]="form" (submit)="onAddUser()">
+    <!-- firstname form field -->
+    <mat-form-field>
+      <input
+        type="text"
+        matInput
+        placeholder="enter firstname"
+        formControlName="firstname"
+      />
+      <mat-error *ngIf="form.get('firstname').errors?.required">
+        firstname is required!
+      </mat-error>
+      <mat-error *ngIf="form.get('firstname').errors?.minLength">
+        firstname should be 3 char long!
+      </mat-error>
+      <mat-error *ngIf="form.get('firstname').errors?.pattern">
+        firstname should be start with letter!
+      </mat-error>
+    </mat-form-field>
+
+    <!-- lastname form field -->
+    <mat-form-field>
+      <input
+        type="text"
+        matInput
+        placeholder="enter lastname"
+        formControlName="lastname"
+      />
+      <mat-error *ngIf="form.get('lastname').errors?.required">
+        lastname is required!
+      </mat-error>
+      <mat-error *ngIf="form.get('lastname').errors?.pattern">
+        lastname should be start with letter!
+      </mat-error>
+      <mat-error *ngIf="form.get('lastname').errors?.minLength">
+        lastname should be 3 char long!
+      </mat-error>
+    </mat-form-field>
+
+    <!-- email form field -->
+    <mat-form-field>
+      <input
+        type="email"
+        matInput
+        placeholder="enter email"
+        formControlName="email"
+      />
+      <mat-error *ngIf="form.get('email').errors?.required">
+        email is required
+      </mat-error>
+      <mat-error *ngIf="form.get('email').invalid">
+        please provide a valid email
+      </mat-error>
+    </mat-form-field>
+
+    <!-- firstname form field -->
+    <mat-form-field>
+      <input
+        type="number"
+        matInput
+        placeholder="enter Phone number"
+        formControlName="phoneNumber"
+      />
+      <mat-error *ngIf="form.get('phoneNumber').errors?.required">
+        Please enter a valid phoneNumber
+      </mat-error>
+      <mat-error *ngIf="form.get('phoneNumber').errors?.pattern">
+        length should be 10 digit starting with (6, 7, 8,9)
+      </mat-error>
+    </mat-form-field>
+    <!---image field-->
+    <div>
+      <button mat-stroked-button type="button" (click)="imagePicker.click()">
+        Pick Image
+      </button>
+      <input type="file" #imagePicker (change)="onImagePicked($event)" />
+    </div>
+
+    <div
+      class="image-preview"
+      *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid"
+    >
+      <img [src]="imagePreview" [alt]="form.value.title" />
+    </div>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      Submit
+    </button>
+    <button mat-raised-button color="warn" type="button" (click)="onReset()">
+      Reset
+    </button>
+    <button mat-raised-button color="accent" type="button" (click)="onGoBack()">
+      GoBack
+    </button>
+  </form>
+</mat-card>
